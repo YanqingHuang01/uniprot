@@ -14,3 +14,11 @@ You can download protein sequences for the proteome from the following link:
 
 4. **uniprotkb_proteome_UP000005640_reviewed_and_unreviewed_and_isoform.fasta**  
    105,497 protein sequences
+
+
+#### Concatenate All Sequences in the Fasta File for Each Line with Header '>'
+
+To concatenate all protein sequences in a fasta file into a single line per sequence (with headers starting with '>'), use the following `awk` command:
+
+```bash
+awk '/^>/ {if (seq) print seq; print $0; seq=""; next} {seq = seq $0} END {if (seq) print seq}' uniprotkb_proteome_UP000005640_reviewed_and_unreviewed_and_isoform.fasta > oneline_uniprotkb_proteome_UP000005640_reviewed_and_unreviewed_and_isoform.fasta
